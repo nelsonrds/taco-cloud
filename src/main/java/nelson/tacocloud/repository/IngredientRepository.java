@@ -1,14 +1,13 @@
 package nelson.tacocloud.repository;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
 
 import nelson.tacocloud.model.Ingredient;
+import nelson.tacocloud.model.Ingredient.Type;
 
-public interface IngredientRepository {
-    List<Ingredient> findAll();
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
 
-    Optional<Ingredient> findById(String id);
-
-    Ingredient save(Ingredient ingredient);
+    List<Ingredient> findByType(Type type);
 }

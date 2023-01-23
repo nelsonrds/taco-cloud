@@ -1,5 +1,6 @@
 package nelson.tacocloud.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +36,9 @@ public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = ingredientRepository.findAll();
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepository.findAll().forEach(ingredients::add);
+        log.info("ingredients: " + ingredients.toString());
         
         // Arrays.asList(
         //         new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
