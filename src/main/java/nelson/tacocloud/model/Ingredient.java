@@ -1,4 +1,4 @@
-package nelson.tacocloud;
+package nelson.tacocloud.model;
 
 import lombok.Data;
 
