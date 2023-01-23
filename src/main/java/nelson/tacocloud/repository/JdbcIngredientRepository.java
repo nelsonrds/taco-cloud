@@ -5,17 +5,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import nelson.tacocloud.model.Ingredient;
 
 
 public class JdbcIngredientRepository {
-    private JdbcTemplate jdbcTemplate;
+    // private JdbcTemplate jdbcTemplate;
 
-    public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    // public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {
+    //     this.jdbcTemplate = jdbcTemplate;
+    // }
 
     // @Override
     // public List<Ingredient> findAll() {

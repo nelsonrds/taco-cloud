@@ -1,28 +1,15 @@
 package nelson.tacocloud.repository;
 
-import java.sql.Types;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
-import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.transaction.annotation.Transactional;
-
-import nelson.tacocloud.model.Ingredient;
-import nelson.tacocloud.model.Taco;
-import nelson.tacocloud.model.TacoOrder;
 
 
 public class JdbcOrderRepository  {
 
-    private JdbcOperations jdbcOperations;
+    // private JdbcOperations jdbcOperations;
 
-    public JdbcOrderRepository(JdbcOperations jdbcOperations) {
-        this.jdbcOperations = jdbcOperations;
-    }
+    // public JdbcOrderRepository(JdbcOperations jdbcOperations) {
+    //     this.jdbcOperations = jdbcOperations;
+    // }
 
     // @Override
     // @Transactional
