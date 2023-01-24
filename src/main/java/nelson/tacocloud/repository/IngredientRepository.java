@@ -8,6 +8,5 @@ import nelson.tacocloud.model.Ingredient;
 import nelson.tacocloud.model.Ingredient.Type;
 
 public interface IngredientRepository extends CrudRepository<Ingredient, String> {
-
     List<Ingredient> findByType(Type type);
 }

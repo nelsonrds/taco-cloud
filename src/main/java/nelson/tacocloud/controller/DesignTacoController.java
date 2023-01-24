@@ -21,6 +21,7 @@ import nelson.tacocloud.model.Taco;
 import nelson.tacocloud.model.TacoOrder;
 import nelson.tacocloud.model.Ingredient.Type;
 import nelson.tacocloud.repository.IngredientRepository;
+import nelson.tacocloud.udt.TacoUDT;
 
 @Slf4j
 @Controller
@@ -76,7 +77,7 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processtaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
+    public String processtaco(@Valid TacoUDT taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
 
         if (errors.hasErrors())
             return "design";
