@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import nelson.tacocloud.model.TacoOrder;
 
-public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
+public interface OrderRepository extends CrudRepository<TacoOrder, String> {
 
     
 }

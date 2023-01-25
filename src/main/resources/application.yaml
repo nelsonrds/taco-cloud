@@ -1,4 +1,10 @@
 spring:
-  datasource:
-    generate-unique-name: false
-    name: tacocloud
+  data:
+    mongodb:
+      uri: "mongodb://root:example@localhost:27017/tacocloudb?authSource=admin"
+      # host: localhost
+      # port: 27017
+      # username: root
+      # password: example
+      # database: tacoclouddb
+

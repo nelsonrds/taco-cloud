@@ -20,13 +20,14 @@ public class TacoCloudApplication {
 	@Bean
 	public CommandLineRunner dataLoader(IngredientRepository repository) {
 		return args -> {
+			repository.deleteAll();
 			repository.save(new Ingredient("TEST", "THISISTEST", Type.CHEESE));
 			System.out.println(repository.findByType(Type.CHEESE));
 		};
 	}
 
 	@Bean
-	public ApplicationRunner dataLoaderApp(IngredientRepository repository){
+	public ApplicationRunner dataLoaderApp(IngredientRepository repository) {
 		return args -> {
 			System.out.println(repository.findByType(Type.CHEESE));
 		};

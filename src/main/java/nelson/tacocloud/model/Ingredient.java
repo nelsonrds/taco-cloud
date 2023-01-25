@@ -1,21 +1,20 @@
 package nelson.tacocloud.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.AccessLevel;
 
 @Data
-@Entity
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Document(collection = "ingredients")
 public class Ingredient {
     @Id
-    private final String id;
+    private String id;
     private final String name;
     private final Type type;
 
