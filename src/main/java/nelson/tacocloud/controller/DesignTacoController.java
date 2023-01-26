@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.validation.Errors;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,11 +73,14 @@ public class DesignTacoController {
     }
 
     @GetMapping
-    public String showDesignForm() {
+    @PreAuthorize("hasRole('USER')")
+    public String showDesignForm(Authentication authentication) {
+        System.out.println(authentication.getName());
         return "design";
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('USER')")
     public String processtaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
 
         if (errors.hasErrors())

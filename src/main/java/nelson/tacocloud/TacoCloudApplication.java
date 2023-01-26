@@ -1,5 +1,7 @@
 package nelson.tacocloud;
 
+import java.util.Arrays;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +28,12 @@ public class TacoCloudApplication {
 		return args -> {
 			repository.save(new Ingredient("TEST", "THISISTEST", Type.CHEESE));
 			userRepository.save(
-					new RegistrationForm("nelson", "nelson", "nelson", "nelsoN", "nelson", "nelson", "nelson", "nelson")
+					new RegistrationForm("nelson", "nelson", "nelson", "nelsoN", "nelson", "nelson", "nelson", "nelson",
+							"ROLE_USER")
+							.toUser(passwordEncoder));
+			userRepository.save(
+					new RegistrationForm("nelson2", "nelson", "nelson", "nelsoN", "nelson", "nelson", "nelson",
+							"nelson", "ROLE_ADMIN")
 							.toUser(passwordEncoder));
 			System.out.println(repository.findByType(Type.CHEESE));
 		};

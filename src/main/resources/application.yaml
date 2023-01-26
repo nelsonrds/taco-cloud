@@ -13,3 +13,10 @@ spring:
   h2:
     console:
       path: /h2
+  # security:
+  #   oauth2:
+  #     client:
+  #       registration:
+  #         facebook:
+
+  

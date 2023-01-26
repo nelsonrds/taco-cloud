@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,7 @@ import nelson.tacocloud.model.User;
 import nelson.tacocloud.repository.UserRepository;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
@@ -35,7 +37,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .authorizeHttpRequests((requests) -> requests.requestMatchers("/",
+                .authorizeHttpRequests((requests) -> requests.requestMatchers("/", "/login",
                         "/error",
                         "/favicon.ico",
                         "/*/*.png",
@@ -47,7 +49,11 @@ public class SecurityConfig {
                         "/*/*.js",
                         "/h2/*").permitAll()
                         .anyRequest().authenticated())
-                .formLogin().and()
+                .formLogin().loginPage("/login").loginProcessingUrl("/authenticate").usernameParameter("user")
+                .passwordParameter("pass").defaultSuccessUrl("/design")
+                // .and().oauth2Login()
+                .and().logout().logoutSuccessUrl("/")
+                .and()
                 .build();
     }
 }
