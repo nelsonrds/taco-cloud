@@ -37,7 +37,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .authorizeHttpRequests((requests) -> requests.requestMatchers("/", "/login",
+        .csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests((requests) -> requests.requestMatchers("/", "/login", "/design",
                         "/error",
                         "/favicon.ico",
                         "/*/*.png",
@@ -49,7 +50,8 @@ public class SecurityConfig {
                         "/*/*.js",
                         "/h2/*").permitAll()
                         .anyRequest().authenticated())
-                .formLogin().loginPage("/login").loginProcessingUrl("/authenticate").usernameParameter("user")
+                .formLogin()
+                .loginPage("/login").loginProcessingUrl("/authenticate").usernameParameter("user")
                 .passwordParameter("pass").defaultSuccessUrl("/design")
                 // .and().oauth2Login()
                 .and().logout().logoutSuccessUrl("/")

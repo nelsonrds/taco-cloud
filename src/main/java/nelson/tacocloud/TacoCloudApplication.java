@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import nelson.tacocloud.model.Ingredient;
@@ -35,11 +36,11 @@ public class TacoCloudApplication {
 					new RegistrationForm("nelson2", "nelson", "nelson", "nelsoN", "nelson", "nelson", "nelson",
 							"nelson", "ROLE_ADMIN")
 							.toUser(passwordEncoder));
-			System.out.println(repository.findByType(Type.CHEESE));
 		};
 	}
 
 	@Bean
+	@Profile("!prod")
 	public ApplicationRunner dataLoaderApp(IngredientRepository repository) {
 		return args -> {
 			System.out.println(repository.findByType(Type.CHEESE));

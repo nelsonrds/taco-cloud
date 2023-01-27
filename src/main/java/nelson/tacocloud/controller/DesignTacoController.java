@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.validation.Errors;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -41,18 +42,18 @@ public class DesignTacoController {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepository.findAll().forEach(ingredients::add);
         log.info("ingredients: " + ingredients.toString());
-        
+
         // Arrays.asList(
-        //         new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
-        //         new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
-        //         new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
-        //         new Ingredient("CARN", "Carnitas", Type.PROTEIN),
-        //         new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
-        //         new Ingredient("LETC", "Lettuce", Type.VEGGIES),
-        //         new Ingredient("CHED", "Cheddar", Type.CHEESE),
-        //         new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
-        //         new Ingredient("SLSA", "Salsa", Type.SAUCE),
-        //         new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
+        // new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
+        // new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
+        // new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
+        // new Ingredient("CARN", "Carnitas", Type.PROTEIN),
+        // new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
+        // new Ingredient("LETC", "Lettuce", Type.VEGGIES),
+        // new Ingredient("CHED", "Cheddar", Type.CHEESE),
+        // new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
+        // new Ingredient("SLSA", "Salsa", Type.SAUCE),
+        // new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
         Type[] types = Ingredient.Type.values();
         for (Type type : types) {
@@ -75,14 +76,13 @@ public class DesignTacoController {
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public String showDesignForm(Authentication authentication) {
-        System.out.println(authentication.getName());
+        log.info("authenticated: " + authentication.getName());
         return "design";
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
     public String processtaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
-
+        log.info("here!");
         if (errors.hasErrors())
             return "design";
 
