@@ -3,6 +3,7 @@ package nelson.tacocloud.model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@RestResource(path = "tacos", rel = "tacos")
 public class Taco {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

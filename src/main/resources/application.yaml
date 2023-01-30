@@ -18,6 +18,9 @@ spring:
   #     client:
   #       registration:
   #         facebook:
+  data:
+    rest:
+      base-path: /data-api
 
 taco:
   orders:

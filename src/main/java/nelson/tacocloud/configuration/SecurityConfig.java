@@ -38,18 +38,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
         .csrf((csrf) -> csrf.disable())
-                .authorizeHttpRequests((requests) -> requests.requestMatchers("/", "/login", "/design",
-                        "/error",
-                        "/favicon.ico",
-                        "/*/*.png",
-                        "/*/*.gif",
-                        "/*/*.svg",
-                        "/*/*.jpg",
-                        "/*/*.html",
-                        "/*/*.css",
-                        "/*/*.js",
-                        "/h2/*").permitAll()
-                        .anyRequest().authenticated())
+                .authorizeHttpRequests((requests) -> requests.anyRequest().permitAll())
                 .formLogin()
                 .loginPage("/login").loginProcessingUrl("/authenticate").usernameParameter("user")
                 .passwordParameter("pass").defaultSuccessUrl("/design")
