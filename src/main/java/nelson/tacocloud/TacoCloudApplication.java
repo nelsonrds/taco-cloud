@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import nelson.tacocloud.model.Ingredient;
@@ -19,6 +20,7 @@ import nelson.tacocloud.repository.TacoRepository;
 import nelson.tacocloud.repository.UserRepository;
 
 @SpringBootApplication
+@EnableKafka
 public class TacoCloudApplication {
 
 	public static void main(String[] args) {
@@ -57,7 +59,7 @@ public class TacoCloudApplication {
 
 			userRepository.save(
 					new RegistrationForm("nelson", "nelson", "nelson", "nelsoN", "nelson", "nelson", "nelson", "nelson",
-							"ROLE_USER")
+							"SCOPE_viewOrders")
 							.toUser(passwordEncoder));
 			userRepository.save(
 					new RegistrationForm("nelson2", "nelson", "nelson", "nelsoN", "nelson", "nelson", "nelson",

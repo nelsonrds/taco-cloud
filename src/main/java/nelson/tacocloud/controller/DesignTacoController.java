@@ -1,12 +1,10 @@
 package nelson.tacocloud.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.validation.Errors;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -41,7 +39,6 @@ public class DesignTacoController {
     public void addIngredientsToModel(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepository.findAll().forEach(ingredients::add);
-        log.info("ingredients: " + ingredients.toString());
 
         // Arrays.asList(
         // new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
@@ -59,8 +56,6 @@ public class DesignTacoController {
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
-
-        log.info(model.toString());
     }
 
     @ModelAttribute(name = "tacoOrder")
