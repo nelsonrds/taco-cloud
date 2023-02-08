@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import nelson.tacocloud.integration.FileWriterGateway;
 import nelson.tacocloud.model.TacoOrder;
 import nelson.tacocloud.reciever.RabbitOrderReciever;
 import nelson.tacocloud.repository.OrderRepository;
@@ -24,12 +25,16 @@ public class OrderApiController {
 
     private KafkaOrderMessagingService kafkaOrderMessagingService;
 
+    private FileWriterGateway fileWriterGateway;
+
     public OrderApiController(OrderRepository orderRepository,
-            RabbitOrderMessagingService rabbitOrderMessagingService, RabbitOrderReciever reciever, KafkaOrderMessagingService kafkaOrderMessagingService) {
+            RabbitOrderMessagingService rabbitOrderMessagingService, RabbitOrderReciever reciever,
+            KafkaOrderMessagingService kafkaOrderMessagingService, FileWriterGateway fileWriterGateway) {
         this.orderRepository = orderRepository;
         this.rabbitOrderMessagingService = rabbitOrderMessagingService;
         this.reciever = reciever;
         this.kafkaOrderMessagingService = kafkaOrderMessagingService;
+        this.fileWriterGateway = fileWriterGateway;
     }
 
     @PostMapping
@@ -40,6 +45,8 @@ public class OrderApiController {
         rabbitOrderMessagingService.directSend("test");
 
         kafkaOrderMessagingService.sendOrder(taco2);
+
+        fileWriterGateway.writeToFile("test.txt", taco2.getId().toString());
 
         return taco2;
     }
