@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+    url: jdbc:h2:mem:tacocloud
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      path: /h2
+  # security:
+  #   oauth2:
+  #     client:
+  #       registration:
+  #         facebook:
+
+taco:
+  orders:
+    page-size: 20
+
+logging:
+  level:
+    tacos: DEBUG

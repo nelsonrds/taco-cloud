@@ -2,3 +2,64 @@ spring:
   datasource:
     generate-unique-name: false
     name: tacocloud
+    url: jdbc:h2:mem:tacocloud
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      path: /h2
+  data:
+    rest:
+      base-path: /data-api
+  rabbitmq:
+    addresses: localhost
+    username: user
+    password: password
+    port: 5672
+    template:
+      exchange: tacocloud.order
+      routing-key: kitchens.central
+  kafka:
+    consumer:
+      group-id: tpd-loggers
+      auto-offset-reset: earliest
+    bootstrap-servers:
+    - localhost:29092
+    template:
+      default-topic: tacocloud.orders.topic
+
+  # security:
+  # oauth2:
+  #   resourceserver:
+  #     jwt:
+  #       jwk-set-uri: http://localhost:9000/oauth2/jwks
+  #   client:
+  #     registration:
+  #       taco-admin-client:
+  #         provider: tacocloud
+  #         client-id: taco-admin-client
+  #         client-secret: secret
+  #         authorization-grant-type: authorization_code
+  #         redirect-uri: "http://localhost:9090/login/oauth2/code/{registrationId}"
+  #         scope: openid,writeIngredients,deleteIngredients,viewOrders
+  #     provider:
+  #       tacocloud:
+  #         issuer-uri: http://localhost:9000
+  #         authorization-uri: http://localhost:9000/oauth2/authorize
+  #         token-uri: http://localhost:9000/oauth2/token
+  #         jwk-set-uri: http://localhost:9000/oauth2/jwks
+  #         user-info-uri: http://localhost:9000/userinfo
+  #         user-name-attribute: sub
+
+taco:
+  orders:
+    page-size: 10
+
+logging:
+  level:
+    tacos: DEBUG
