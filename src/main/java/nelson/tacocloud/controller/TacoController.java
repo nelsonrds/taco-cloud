@@ -1,7 +1,6 @@
 package nelson.tacocloud.controller;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,5 +1,6 @@
 package nelson.tacocloud.controller;
 
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,8 +40,10 @@ public class OrderApiController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
     public TacoOrder postOrder(@RequestBody TacoOrder taco) {
         TacoOrder taco2 = orderRepository.save(taco);
+
         rabbitOrderMessagingService.sendOrder(taco2);
         rabbitOrderMessagingService.directSend("test");
 

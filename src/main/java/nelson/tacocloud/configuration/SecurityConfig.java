@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/ingredients/**")
                         .hasAuthority("SCOPE_deleteIngredients")
                         .requestMatchers(HttpMethod.GET, "/data-api/tacoOrders").hasAuthority("SCOPE_viewOrders")
-                        .requestMatchers(HttpMethod.GET, "/api/ingredients").hasAuthority("SCOPE_viewOrders")
+                        .requestMatchers(HttpMethod.GET, "/api/ingredients").permitAll()
                         .anyRequest().permitAll())
 
                 // .oauth2Login((oauth2Login) ->
